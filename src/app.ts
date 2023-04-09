@@ -15,7 +15,7 @@ function merge<T extends object, U extends object>(objA: T, objB: U) {
   return Object.assign(objA, objB);
 }
 
-const mergedObj = merge({ name: 'Max', hobbies: ['Sports'] }, { age: 30 });
+const mergedObj = merge({ name: "Max", hobbies: ["Sports"] }, { age: 30 });
 console.log(mergedObj);
 
 interface Lengthy {
@@ -23,25 +23,25 @@ interface Lengthy {
 }
 
 function countAndDescribe<T extends Lengthy>(element: T): [T, string] {
-  let descriptionText = 'Got no value.';
+  let descriptionText = "Got no value.";
   if (element.length === 1) {
-    descriptionText = 'Got 1 element.';
+    descriptionText = "Got 1 element.";
   } else if (element.length > 1) {
-    descriptionText = 'Got ' + element.length + ' elements.';
+    descriptionText = "Got " + element.length + " elements.";
   }
   return [element, descriptionText];
 }
 
-console.log(countAndDescribe(['Sports', 'Cooking']));
+console.log(countAndDescribe(["Sports", "Cooking"]));
 
 function extractAndConvert<T extends object, U extends keyof T>(
   obj: T,
   key: U
 ) {
-  return 'Value: ' + obj[key];
+  return "Value: " + obj[key];
 }
 
-extractAndConvert({ name: 'Max' }, 'name');
+extractAndConvert({ name: "Max" }, "name");
 
 class DataStorage<T extends string | number | boolean | object> {
   private data: T[] = [];
@@ -63,9 +63,9 @@ class DataStorage<T extends string | number | boolean | object> {
 }
 
 const textStorage = new DataStorage<string>();
-textStorage.addItem('Max');
-textStorage.addItem('Manu');
-textStorage.removeItem('Max');
+textStorage.addItem("Max");
+textStorage.addItem("Manu");
+textStorage.removeItem("Max");
 console.log(textStorage.getItems());
 
 const numberStorage = new DataStorage<number>();
@@ -76,3 +76,25 @@ const numberStorage = new DataStorage<number>();
 // objStorage.addItem({ name: 'Manu' });
 // objStorage.removeItem(maxObj);
 // console.log(objStorage.getItems());
+
+interface CourseGoal {
+  title: string;
+  description: string;
+  completeUntil: Date;
+}
+
+function createCourseGoal(
+  title: string,
+  description: string,
+  date: Date
+): CourseGoal {
+  // Partial<CourseGoal> = {}
+  let courseGoal: Partial<CourseGoal> = {};
+  courseGoal.title = title;
+  courseGoal.description = description;
+  courseGoal.completeUntil = date;
+  return courseGoal as CourseGoal;
+}
+
+const names: Readonly<string[]> = ["Max", "Anna"];
+// names.push("Manu");
